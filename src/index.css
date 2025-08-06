@@ -1,0 +1,1315 @@
+:root {
+  --bg-color: #3c3c3c;
+  --surface-color: #2a2a2a;
+  --text-color: #ffffff;
+  --border-color: #555;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --blue: #007bff;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --red: #dc3545;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-size: 16px;
+}
+
+.app-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header cart'
+    'main   cart';
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  grid-area: header;
+  background-color: var(--surface-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 2px solid #000;
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.header nav a {
+  margin-left: 2rem;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: 500;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.header nav a.active {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+.main-content {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.menu-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.category-btn {
+  padding: 1rem 1.5rem;
+  border: 2px solid var(--border-color);
+  background-color: var(--blue);
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.category-btn.active {
+  background-color: var(--yellow);
+  color: #333;
+  border-color: var(--yellow);
+}
+
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.75rem;
+}
+
+.product-card {
+  background-color: var(--green);
+  border: 2px solid var(--border-color);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 100px;
+  padding: 0.5rem;
+  font-weight: bold;
+}
+
+.product-card:hover {
+  filter: brightness(1.2);
+}
+
+.product-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.product-card p {
+  font-size: 1rem;
+}
+
+/* CART STYLES */
+.cart {
+  grid-area: cart;
+  background-color: var(--surface-color);
+  border-left: 2px solid #000;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  background-color: #1c1c1c;
+  height: 70px;
+}
+
+.cart-header h2 {
+  font-size: 1.5rem;
+  padding: 0;
+  background-color: transparent;
+}
+
+.btn-cancel-order {
+    background-color: var(--red);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cart-items {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.empty-cart {
+  color: #888;
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 1.2rem;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.item-details, .item-controls {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.item-name {
+    font-weight: 500;
+}
+
+.item-price {
+  font-weight: 500;
+  color: var(--yellow);
+}
+
+.item-controls {
+    gap: 0.5rem;
+}
+
+.quantity-btn {
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.item-quantity {
+    font-size: 1.1rem;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.trash-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--red);
+    margin-left: auto;
+}
+
+.cart-summary {
+  padding: 1.5rem;
+  border-top: 2px solid #000;
+}
+
+.cart-summary h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.payment-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.payment-buttons button {
+  padding: 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-cash {
+  background-color: var(--green);
+  color: white;
+}
+
+.btn-card {
+  background-color: var(--blue);
+  color: white;
+}
+
+
+/* VARIANT MODAL STYLES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--surface-color);
+  padding: 2rem;
+  border-radius: 8px;
+  min-width: 400px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: #ccc;
+}
+
+.variant-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.variant-buttons button {
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid var(--green);
+  background-color: var(--green);
+  color: white;
+}
+
+.close-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--border-color);
+  background: transparent;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ADMIN PANEL STYLES */
+.admin-panel {
+  padding: 2rem;
+  color: #333; /* Admin panelinde okunabilirlik için metin rengi siyah */
+}
+.admin-panel h1, .admin-panel h2, .admin-panel h3 {
+  color: #333;
+}
+
+.admin-section {
+  background-color: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.category-add-form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.category-add-form input {
+  flex-grow: 1;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.admin-panel button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+.delete-btn {
+  background-color: var(--red) !important;
+}
+
+.category-editor .category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.product-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.table-header, .table-row {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+.table-header {
+  font-weight: bold;
+}
+.table-row input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+.variant-inputs {
+    font-size: 0.9em;
+}
+.add-product-btn {
+  margin-top: 1rem;
+  background-color: var(--green);
+}
+
+.new-product-form {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.new-product-form h4 {
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+.variant-price-inputs {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.save-btn {
+  background-color: var(--green);
+}
+
+.cancel-btn {
+  background-color: #888;
+}
+
+
+/* REPORTS PAGE STYLES */
+.reports-page {
+    padding: 2rem;
+    color: #333;
+    background-color: #f9f9f9;
+}
+.reports-page h1, .reports-page h3, .reports-page h4 {
+    color: #333;
+}
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+.date-filters button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.date-filters button:hover {
+    background-color: #f0f2f5;
+}
+
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.summary-cards .card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+.summary-cards .card h4 {
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 1rem;
+}
+.summary-cards .card p {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.chart-container {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+.chart-container h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+
+/* RAPORLAR SAYFASI İÇİN YENİ STİLLER */
+
+.date-filters button.active {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.report-widget {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    height: 100%; /* grid için */
+}
+
+.reports-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Grafik daha geniş, liste daha dar */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.top-products-list {
+    list-style-position: inside;
+    padding-left: 0.5rem;
+}
+
+.top-products-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.top-products-list li:last-child {
+    border-bottom: none;
+}
+
+.top-products-list span:last-child {
+    font-weight: bold;
+}
+
+.sales-list-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+
+.sales-list-header, .sales-list-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    align-items: center;
+}
+
+.sales-list-header {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #eee;
+}
+
+.sales-list-row {
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sales-list-row:hover {
+    background-color: #f0f2f5;
+}
+
+.sales-list-body .no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
+
+.sale-details {
+    background-color: #f0f2f5;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.sale-details h4 {
+    margin-bottom: 0.5rem;
+}
+
+.sale-details ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sale-details li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem 0;
+}
+
+.sale-details li span {
+    font-weight: 500;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* LOGIN PAGE STYLES */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #333;
+}
+.login-form {
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+.login-form h1 {
+  margin-bottom: 0.5rem;
+}
+.login-form p {
+  margin-bottom: 1.5rem;
+  color: #666;
+}
+.login-form input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.login-form button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.error-message {
+  color: var(--red);
+  margin-bottom: 1rem !important;
+}
+
+/* ADMIN HOME PAGE STYLES */
+.admin-home-container {
+  padding: 3rem;
+  text-align: center;
+  color: #333;
+}
+.admin-home-container h1 {
+  margin-bottom: 2rem;
+}
+.admin-menu-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.admin-menu-buttons button {
+  padding: 2rem 3rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  background-color: var(--blue);
+}
+.admin-menu-buttons button:last-child {
+  background-color: var(--green);
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* LOGOUT BUTTON STYLES */
+.logout-btn {
+    margin-left: 2rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--red);
+    background-color: transparent;
+    color: var(--red);
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+    background-color: var(--red);
+    color: white;
+}
+
+/* HISTORY PAGE STYLES */
+.history-page {
+    padding: 2rem;
+    color: #333;
+    background-color: #f9f9f9;
+}
+.history-page h1 {
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.history-list-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+.history-list-header, .history-list-row {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr 1fr 1fr;
+    gap: 1rem;
+    padding: 1rem;
+    align-items: center;
+}
+.history-list-header {
+    font-weight: bold;
+    background-color: #f0f2f5;
+    border-bottom: 2px solid #eee;
+}
+.history-list-row {
+    border-bottom: 1px solid #f0f0f0;
+}
+.history-list-row:last-child {
+    border-bottom: none;
+}
+.products-col {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* SEPET GİZLENDİĞİNDE KULLANILACAK TAM EKRAN LAYOUT */
+.app-container-full-width {
+  display: grid;
+  grid-template-columns: 1fr; /* Sadece tek bir sütun */
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header'
+    'main';
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* RAPORLAR SAYFASI İÇİN YENİ VE GÜNCELLENMİŞ STİLLER */
+
+.report-nav-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.report-nav-buttons button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid var(--blue);
+    background-color: transparent;
+    color: var(--blue);
+}
+
+.report-nav-buttons button.active {
+    background-color: var(--blue);
+    color: white;
+}
+
+.report-widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap; /* Küçük ekranlar için */
+    gap: 1rem;
+}
+
+/* Raporlar sayfasındaki ana başlık ve filtreleri birbirinden ayır */
+.reports-page .reports-header {
+    align-items: flex-start;
+}
+
+/* Satış özeti sayfasındaki filtreleri kaldırıyoruz, artık bileşenlerin içinde */
+.reports-page .date-filters {
+    display: none;
+}
+
+/* Bileşenlerin içindeki filtreler için stiller */
+.report-widget .date-filters {
+    display: flex;
+    gap: 0.5rem;
+}
+.report-widget .date-filters button {
+    margin-left: 0;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+}
+.report-widget .date-filters button:hover {
+    background-color: #f0f2f5;
+}
+.report-widget .date-filters button.active {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* RAPORLAR ANA MENÜSÜ STİLLERİ */
+.report-home-container {
+  padding: 3rem;
+  text-align: center;
+  color: #333;
+}
+.report-home-container h1 {
+  margin-bottom: 2rem;
+}
+
+/* Geri Dön Butonu Stili */
+.back-to-menu-btn {
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    background-color: #6c757d;
+    color: white;
+    transition: background-color 0.2s;
+}
+.back-to-menu-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Raporlar sayfasındaki ana başlığı ve navigasyonu kaldırıyoruz */
+.reports-page > .reports-header {
+    display: none;
+}
+
+/* Raporlar Grid'i Satış Özetlerinde tek sütunlu yap */
+.reports-page .reports-grid {
+    grid-template-columns: 1fr;
+}
+
+/* RAPORLAR SAYFASI YENİ DÜZENİ İÇİN EKLENECEK STİLLER */
+
+/* Raporlar ana menü ekranı (admin paneliyle aynı stili kullanır) */
+.report-home-container {
+  padding: 3rem;
+  text-align: center;
+  color: #333;
+  background-color: #f9f9f9; /* Raporlar için açık renk arka plan */
+  height: 100%;
+}
+.report-home-container h1 {
+  margin-bottom: 2rem;
+}
+
+/* Raporların içindeyken görünen "Geri Dön" butonu */
+.back-to-menu-btn {
+    margin-bottom: 2rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #6c757d;
+    background-color: #6c757d;
+    color: white;
+    transition: background-color 0.2s;
+}
+.back-to-menu-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Her bir rapor bileşeninin başlık ve filtre bölümü */
+.report-widget-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Her bir rapor bileşeninin kendi içindeki tarih filtreleri */
+.report-widget .date-filters {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.report-widget .date-filters button {
+    margin-left: 0;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333; /* Buton yazı rengi */
+}
+
+.report-widget .date-filters button:hover {
+    background-color: #f0f2f5;
+}
+
+.report-widget .date-filters button.active {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* Z RAPORU OLUŞTURMA STİLLERİ */
+.z-report-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+.z-report-controls input[type="date"] {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+.z-report-controls button {
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+}
+.z-report-preview {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #f0f2f5;
+    border-radius: 6px;
+}
+.z-report-preview h4 {
+    margin-bottom: 1rem;
+}
+.z-report-preview pre {
+    background-color: #e2e8f0;
+    padding: 1rem;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.z-report-preview .print-btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--green);
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+/* ADİSYONDAKİ YENİ ANA ÖDEME BUTONU */
+.btn-main-payment {
+    width: 100%;
+    background-color: var(--green);
+    color: white;
+    padding: 1.5rem !important;
+}
+.btn-main-payment:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/* YENİ ÖDEME SAYFASI STİLLERİ */
+.payment-page {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    height: 100%;
+    color: #333;
+    background-color: #f9f9f9;
+}
+.payment-summary, .payment-options {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.payment-summary h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.price-details {
+    font-size: 1.5rem;
+}
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #eee;
+}
+.price-row.discount {
+    color: var(--red);
+}
+.price-row.total {
+    font-size: 2rem;
+    font-weight: bold;
+    border-top: 2px solid #333;
+    margin-top: 1rem;
+}
+
+.option-group {
+    margin-bottom: 2rem;
+}
+.option-group h2 {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+.option-group button {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.btn-discount {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+.btn-discount-clear {
+    background-color: #f8f9fa;
+}
+.btn-payment-type {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+}
+.btn-treat {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+/* ... Önceki tüm CSS kodları aynı kalıyor ... */
+
+.z-report-preview p {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* KASA AÇ BUTONU STİLLERİ */
+.cash-drawer-section {
+    margin-bottom: 1rem;
+}
+.btn-open-drawer {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    border: 2px solid var(--yellow);
+    background-color: transparent;
+    color: var(--yellow);
+    transition: all 0.2s ease;
+}
+.btn-open-drawer:hover {
+    background-color: var(--yellow);
+    color: #333;
+}
+
+/* MÜŞTERİ BİLGİLENDİRME EKRANI STİLLERİ (GÜNCELLENDİ) */
+/* index.css */
+
+/* GLOBAL: tam ekran garantisi 
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+*/
+/* MÜŞTERİ BİLGİLENDİRME EKRANI STİLLERİ */
+.customer-display {
+  background-color: #0a192f;
+  color: #e6f1ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-top-left {
+  position: absolute;
+  top: 2.5rem;
+  left: 3rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ccd6f6;
+  opacity: 0.7;
+}
+
+.brand-bottom-right {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 3rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #64ffda;
+  opacity: 0.6;
+}
+
+.customer-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+}
+
+.customer-cart {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-cart-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
+  border-bottom: 4px solid #64ffda;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.customer-cart-items {
+  flex-grow: 1;
+  overflow-y: auto;
+  font-size: 1.8rem;
+}
+
+.customer-cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.welcome-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 4rem;
+  color: #ccd6f6;
+  opacity: 0.5;
+}
+
+.customer-total {
+  font-size: 3.5rem;
+  text-align: right;
+  padding-top: 2rem;
+  border-top: 4px solid #64ffda;
+  color: #64ffda;
+}
+
+.customer-display {
+    background-color: #0a192f; /* Koyu mavi arka plan */
+    color: #e6f1ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 3rem;
+    position: relative; /* Köşe yazıları için gerekli */
+    overflow: hidden; /* Taşmaları engelle */
+}
+
+/* YENİ: Sol üst marka stili */
+.brand-top-left {
+    position: absolute;
+    top: 2.5rem;
+    left: 3rem;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ccd6f6;
+    opacity: 0.7;
+}
+
+/* YENİ: Sağ alt marka stili */
+.brand-bottom-right {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 3rem;
+    font-size: 1.5rem; /* Daha küçük font */
+    font-weight: 500;
+    color: #64ffda;
+    opacity: 0.6;
+}
+
+.customer-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 5rem; /* Üstteki yazıya yer açmak için */
+}
+
+.customer-cart {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.customer-cart-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 2rem;
+    border-bottom: 4px solid #64ffda;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+.customer-cart-items {
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 1.8rem;
+}
+.customer-cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+.welcome-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-size: 4rem;
+    color: #ccd6f6;
+    opacity: 0.5;
+}
+.customer-total {
+    font-size: 3.5rem;
+    text-align: right;
+    padding-top: 2rem;
+    border-top: 4px solid #64ffda;
+    color: #64ffda;
+}
