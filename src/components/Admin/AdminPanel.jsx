@@ -88,9 +88,16 @@ const AdminPanel = () => {
   };
 
   const handleDeleteProduct = (categoryIndex, productIndex) => {
-     const newMenu = [...menu];
-     newMenu[categoryIndex].products.splice(productIndex, 1);
-     updateMenu(newMenu);
+    const newMenu = menu.map((category, idx) => {
+      if (idx === categoryIndex) {
+        return {
+          ...category,
+          products: category.products.filter((_, pIdx) => pIdx !== productIndex),
+        };
+      }
+      return category;
+    });
+    updateMenu(newMenu);
   };
 
   return (
