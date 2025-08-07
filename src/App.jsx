@@ -1,7 +1,6 @@
 // src/App.jsx
 import React, { useState } from 'react';
 import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
-
 import Header from './components/Header';
 import Cart from './components/Cart';
 import MenuPage from './pages/MenuPage';
@@ -16,6 +15,7 @@ import VariantModal from './components/VariantModal';
 import { CartProvider, useCart } from './context/CartContext';
 import { MenuProvider } from './context/MenuContext';
 import CustomerDisplayPage from './pages/CustomerDisplayPage';
+import TitleBar from './components/TitleBar';
 
 function AppContent() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -54,6 +54,8 @@ function AppContent() {
 
   return (
     <>
+      <TitleBar />
+
       <div className={showCart ? "app-container" : "app-container-full-width"}>
         <Header isAdmin={isAdmin} onLogout={handleLogout} />
 

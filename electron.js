@@ -13,24 +13,13 @@ const menuDataPath = path.join(userDataPath, 'menu-data.json');
 const initialMenuPath = path.join(__dirname, 'src/data/menu.js');
 
 function createWindows() {
-  // ANA PENCERE (KASİYER EKRANI) – normal pencere, sonrasında maximize
   mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 1280,
     height: 800,
-    frame: true,            // pencere çerçevesiyle birlikte
-    resizable: true,        // boyutlandırılabilir
-    autoHideMenuBar: false, // menü bar gözüksün
-    show: false,            // önce gizle, sonra ready-to-show’da göster
+    frame: false,          // frameless ise
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false,
-      contextIsolation: true,
-    },
-  });
-  // yükleme tamamlanınca maximize edip göster
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.maximize();
-    mainWindow.show();
+      preload: path.join(__dirname, 'preload.js')
+    }
   });
 
   const isDev = !app.isPackaged;
@@ -39,6 +28,12 @@ function createWindows() {
     : `file://${path.join(__dirname, 'dist/index.html')}`;
 
   mainWindow.loadURL(startUrl);
+
+  // yükleme tamamlanınca maximize edip göster
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.maximize();
+    mainWindow.show();
+  });
 
   // MÜŞTERİ BİLGİLENDİRME EKRANI
   const displays = screen.getAllDisplays();
@@ -84,7 +79,10 @@ function createWindows() {
   });
 }
 
+
 // İki pencere arası mesajlaşma
+
+
 ipcMain.on('update-customer-display', (event, cartData) => {
   if (customerWindow) {
     customerWindow.webContents.send('cart-updated', cartData);
@@ -142,6 +140,16 @@ ipcMain.on('update-menu', (event, newMenuData) => {
     try {
         fs.writeFileSync(menuDataPath, JSON.stringify(newMenuData, null, 2));
     } catch (error) { console.error("Menü dosyasına yazılırken hata oluştu:", error); }
+});
+
+ipcMain.on('window-close', (event) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  if (win) win.close();
+});
+
+ipcMain.on('window-minimize', (event) => {
+  const win = BrowserWindow.fromWebContents(event.sender);
+  if (win) win.minimize();
 });
 
 app.whenReady().then(createWindows); // Fonksiyon adını güncelledik
