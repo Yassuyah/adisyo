@@ -1139,7 +1139,7 @@ body {
 /* MÜŞTERİ BİLGİLENDİRME EKRANI STİLLERİ (GÜNCELLENDİ) */
 /* index.css */
 
-/* GLOBAL: tam ekran garantisi 
+/* GLOBAL: tam ekran garantisi  */
 html, body, #root {
   margin: 0;
   padding: 0;
@@ -1147,7 +1147,7 @@ html, body, #root {
   height: 100%;
   overflow: hidden;
 }
-*/
+
 /* MÜŞTERİ BİLGİLENDİRME EKRANI STİLLERİ */
 .customer-display {
   background-color: #0a192f;

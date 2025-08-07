@@ -13,19 +13,24 @@ const menuDataPath = path.join(userDataPath, 'menu-data.json');
 const initialMenuPath = path.join(__dirname, 'src/data/menu.js');
 
 function createWindows() {
-  // ANA PENCERE (KASİYER EKRANI)
-  // 1) Kasiyer (ana) penceresi – artık normal boyutta, tıklamalar çalışır
+  // ANA PENCERE (KASİYER EKRANI) – normal pencere, sonrasında maximize
   mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
-    //fullscreen: true,      <- kaldırdık
-    frame: true,             // pencere çerçevesi, menü butonları vs.
-    autoHideMenuBar: false,  // menü bar gözüksün
+    frame: true,            // pencere çerçevesiyle birlikte
+    resizable: true,        // boyutlandırılabilir
+    autoHideMenuBar: false, // menü bar gözüksün
+    show: false,            // önce gizle, sonra ready-to-show’da göster
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
       contextIsolation: true,
     },
+  });
+  // yükleme tamamlanınca maximize edip göster
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.maximize();
+    mainWindow.show();
   });
 
   const isDev = !app.isPackaged;
